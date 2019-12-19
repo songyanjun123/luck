@@ -1,0 +1,875 @@
+<html>
+
+	<head>
+		<title>微糖时代年会抽奖</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<script src="js/jquery.min.js"></script>
+		<script src="js/three.js"></script>
+		<script src="js/tween.min.js"></script>
+		<script src="js/TrackballControls.js"></script>
+		<script src="js/CSS3DRenderer.js"></script>
+		<script src="js/data.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/prefixfree.min.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" href="css/animate.min.css">
+		<link rel="stylesheet" type="text/css" href="css/styl.css" />
+		<style type="text/css">
+			body {
+				background: url(images/bg.jpg) no-repeat;
+				background-size: 100% 100%;
+				perspective: 340px;
+				position: relative;
+			}
+		</style>
+	</head>
+
+	<body id="body">
+		
+		<div class="cjImg" id="btnSta">
+			<img src="images/startBtn.png"/>
+		</div>
+		<div id="btnStop" class="cjImg" style="display: none;">
+			<img src="images/stopBtn.png"/>
+		</div>
+		<div class="winShowItem">
+			<div class="showCon">
+				<div class="winnerTitle">
+					<h1 id="h1prize">特等奖</h1>
+				</div>
+				<ul id="winItem"></ul>
+				<p class="closeWinner"> 确定 </p>
+				<div style="clear: both;"></div>
+			</div>
+		</div>
+		<div id="logo"><img src="images/logo.png" /></div>
+		<div id="guang"><img src="images/guang.png" /></div>
+		<div class="stars"></div>
+		<div id="container"></div>
+		<div id="info">
+			<div text="微糖时代2018年会抽奖">微糖时代2018年会抽奖</div>
+			<div text="微糖时代2018年会抽奖">微糖时代2018年会抽奖</div>
+		</div>
+		<!--成长史开始-->
+		<div class="vt_grow">
+			<ul id="vt_grow_ul">
+				<li>微糖时代成立于2012年</li>
+				<li>2015年成立微糖北京广告子公司</li>
+				<li>2017年成立微糖廊坊销售子公司</li>
+				<li>2018年在职员工达100人。预计2019年初发展在职员工200人</li>
+			</ul>
+		</div>
+		<!--成长史开始-->
+		<div id="menu">
+			<button id="sphere" style="display: none;">球球</button>
+			<button id="startMic">播放音乐</button>
+			<button id="tabBg">切换背景</button>
+			<button id="lookAll">查看中奖人员</button>
+			
+		</div>
+		<!--中奖者列表-->
+		<div class="rightWinList">
+			<div class="pos">
+				<span><img src="images/winnerList.png"/></span>
+				<h1 class="winTitle">特等奖</h1>
+				<ul class="rightList"></ul>
+			</div>
+		</div>
+		<!--抽奖弹窗开始-->
+		<div id="mask"></div>
+		<div class="show_info show_info_cjtc showModelLuckItem animated" id="cjtc">
+			<div class="info_my">
+				<div class="info_mem">
+					<div class="times">
+						<img src="images/time3.jpg" id="timeNumImg"/>
+						<span class="in" id="timeNum" style="display: none;">3</span>
+					</div>
+					<input type="number" name="luckUserCount" id="luckUserCount" value="" placeholder="请输入抽奖人数" style="display: none;height: 2rem;background: #fff;" />
+					<button style="display: none;" id="sure">确定</button>
+				</div>
+			</div>
+		</div>
+		
+		<div id="radio_div"></div>
+		<div id="radio_xu_div"></div>
+		<div id="showListAll" style="display: none;">
+			<h1>显示奖项列表</h1>
+			<ul class="menu">
+				<li class="list">
+					<a href="#">特等奖</a>
+					<ul class="items firstPrize">
+					</ul>
+				</li>
+				<li class="list">
+					<a href="#">一等奖</a>
+					<ul class="items firestOne">
+					</ul>
+				</li>
+				<li class="list">
+					<a href="#">二等奖</a>
+					<ul class="items secondAward">
+					</ul>
+				</li>
+				<li class="list">
+					<a href="#">三等奖</a>
+					<ul class="items thirdAward">
+					</ul>
+				</li>
+				<li class="tuhao list">
+					<a href="#">土豪奖</a>
+				</li>
+			</ul>
+			<div class="items_close"><span>关闭</span></div>
+		</div>
+		<!--显示全部---土豪奖开始-->
+		<div class="showAllTh">
+			<ul class="items tuhaoList">
+			</ul>
+			<div class="items_close close_show_all_th"><span>关闭</span></div>
+		</div>
+		<!--显示全部---土豪奖结束-->
+		<audio id="runingmic" class="hide" loop>
+			<source src="muic/runMic.wav">
+		</audio>
+		<audio id="stopgmic" class="hide">
+			<source src="muic/stop.mp3">
+		</audio>
+		<audio id="openWeb" class="hide" loop="loop">
+			<source src="muic/openWeb.mp3">
+		</audio>
+		<audio id="countDown" class="hide" loop="loop">
+			<source src="muic/countDown.mp3">
+		</audio>
+
+	</body>
+	<script type="text/javascript">
+		var otmpArr = [];
+		var otmpArray = [];
+		for(var item in allData){
+			if(allData[item].isShowMic == 0){
+				otmpArr.push(allData[item]);
+				localStorage.setItem("allDataA", JSON.stringify(otmpArr));
+			}else{
+				console.log("初始化数据ok，请抽奖");
+			}
+		}
+		
+		var personArray = new Array; /* 空数组 放图片数组 */
+		var CurPersonNum = 0;
+		var myMask = document.getElementById("mask"); /*遮罩层*/
+		// animate
+		var _in = ['slideInRight'];
+		var _out = ['slideOutRight'];
+		var timer = null; //倒计时
+		var stopRandomNum = null;
+		var index = -1;
+		var prize = "";
+		var getConfigId;
+		var sumWin = []; /* 抽奖者中数据 */
+		var stopMuic = null;
+		var allWin = [];
+		var isStrat = false;
+		var isBg = false;
+		var winItemId;
+		
+		//绑定监听事件
+       
+		$(function() {
+			var getRand;
+			var camera, scene, renderer;
+			var controls;
+			var id = null;
+			var objects = [];
+			var targets = {
+				table: [],
+				sphere: [],
+				helix: [],
+				grid: []
+			};
+			var playPromise;
+			init();
+			animate();
+			clearInterval(timer);
+			var runingmic = document.getElementById("runingmic");
+			runingmic.volume = 0.5;
+			var stopgmic = document.getElementById("stopgmic");
+			stopgmic.volume = 1;
+			var openWeb = document.getElementById("openWeb");
+			openWeb.volume = 0.5;
+			var countDown = document.getElementById("countDown");
+			countDown.volume = 1;
+			$("#startMic").click(function(){
+				openWeb.play();
+			})
+			
+			var cnt = 1; 
+	        document.onkeydown = function(event){
+	        	var e = event || window.event || arguments.callee.caller.arguments[0];
+	        	if(e && e.keyCode==32){
+	        		if(cnt == 1){
+	        			cnt = 0;
+	        			openWeb.pause();
+	        		}else{
+	        			cnt = 1;
+	        			openWeb.play();
+	        		}
+	        	}
+	        	/* 禁止刷新  测试环境勿用 */
+	        	var e = event || window.event || arguments.callee.caller.arguments[0];
+	            if(e && e.keyCode == 116){ 
+	            	alert("请勿刷新数据，后果自己承担！");
+	                return false;
+	            }
+	        }
+			/* 关闭中奖弹框 */
+			$(".closeWinner").click(function() {
+				$(".winShowItem").fadeOut("slow");
+				isStrat = false;
+			});
+			//查看全部抽奖人员
+			$("#lookAll").click(function() {
+				$("#showListAll").fadeIn("slow");
+			});
+			/* 点击抽奖按钮*/
+			document.getElementById("btnSta").addEventListener("click", function() {
+				if(isStrat){
+					alert("请等待该奖项抽完再继续!");
+				}else{
+					isStrat = true;
+					h1prize.innerHTML = "";
+					prize = "";
+					this.style.display = " none"; // 隐藏开始抽奖按钮
+					btnStop.style.display = "inline-block"; //显示停止抽奖按钮
+					myMask.style.display = "block"; // 隐藏弹框 
+					document.body.style.overflow = "hidden";
+					/* 每次点击开始清空右边数据并且隐藏 */
+					$(".rightWinList").hide();
+					$(".winTitle").html("");
+					$(".rightList").html("")
+					$(".showModelLuckItem").show();
+					getConfigData();
+				}
+				
+			}, false);
+			
+			/* 切换背景 */
+			document.getElementById("tabBg").addEventListener("click", function(){
+				if(isBg){
+					isBg = false;
+					$("body").css({
+						"background":"url(images/bg.jpg) no-repeat",
+						"background-size":" 100% 100%",
+						"perspective": "340px",
+						"position": "relative"
+					});
+					
+				}else{
+					isBg = true;
+					$("body").css({
+						"background":"url(images/bg1.jpg) no-repeat",
+						"background-size":" 100% 100%",
+						"perspective": "340px",
+						"position": "relative"
+					});
+					
+				}
+			})
+			/* 点击停止*/
+			document.getElementById("btnStop").addEventListener("click", function() {
+				this.style.display = " none";
+				btnSta.style.display = "inline-block";
+				stop();
+				getLuckId();
+			}, false);
+			/* 獲取抽獎配置 */
+			function getConfigData() {
+				var configId = ""; //配置抽獎id
+				var configName = ""; //配置抽獎name
+				var configControid = ""; //配置抽獎btnid
+				var configWinTime = ""; //配置抽獎winTime
+				var configUserCount = ""; //配置抽獎人數
+				var configHide = ""; //配置抽獎hide
+				var configWinDesc = ""; //配置獎品描述
+				var configState = ""; //配置獎項是否抽中
+				for(var conFig in config) {
+					configId = config[conFig].id;
+					configName = config[conFig].name;
+					configControid = config[conFig].controid;
+					configWinTime = config[conFig].winTime;
+					configUserCount = config[conFig].userCount;
+					configHide = config[conFig].hide;
+					configWinDesc = config[conFig].winDesc;
+					configState = config[conFig].state;
+					if(config[conFig].id !== -1 && configState == 1) {
+						if(config[conFig].id == 3) {
+							getConfigId = config[conFig].id;
+							config[config[conFig].id].state = 0;
+							
+						} else if(config[conFig].id == 2) {
+							getConfigId = config[conFig].id;
+							config[config[conFig].id].state = 0;
+							
+						} else if(config[conFig].id == 1) {
+							getConfigId = config[conFig].id;
+							config[config[conFig].id].state = 0;
+							
+						} else if(config[conFig].id == 0) {
+							getConfigId = config[conFig].id;
+							config[config[conFig].id].state = 0;
+							
+						}
+						luckIng();
+						break;
+					} else if(config[conFig].id == -1 && configState == 1) {
+						timeNumImg.src = "images/time3.jpg";
+						$(".show_info .info_my .times").css("height","44vh");
+						$("#sure").removeAttr("disabled");
+						getConfigId = config[conFig].id;
+						prize = config[conFig].name;
+						h1prize.innerHTML = prize;
+						$(".winTitle").html(prize)
+						$("#timeNum").html(config[conFig].winTime);
+						$("#luckUserCount").show();
+						$("#sure").show();
+						clearInterval(timer);
+						clearInterval(stopRandomNum);
+						configId = config[conFig].id;
+						var luckUserCount = $("#luckUserCount").val();
+						if(luckUserCount == "" || luckUserCount == 0) {
+							return false;
+						}
+						luckIng();
+						break;
+					}
+					/* 抽奖进行中 */
+					function luckIng() {
+						prize = config[conFig].name;
+//						startPrize.innerHTML = prize;
+						h1prize.innerHTML = prize;
+						$(".winTitle").html(prize);
+						$("#timeNum").html(config[conFig].winTime);
+						timer = setInterval(function() {
+							var time = $("#timeNum").html();
+							if(time == 1) {
+								$(".showModelLuckItem").fadeOut("slow");
+								$("#mask").fadeOut("slow");
+								clearInterval(timer);
+								stopRandomNum = setInterval(function() {
+									showRandomNum(config[conFig].userCount);
+								}, 100);
+								start();
+								countDown.pause();
+								openWeb.play();
+							} else {
+								timeNumImg.src = "images/time"+ (time -1) +".jpg";
+								timeNum.innerHTML = time-1;
+								countDown.play();
+								openWeb.pause();
+							}
+						}, 1000);
+						timeNumImg.src = "images/time3.jpg"
+					}
+				}
+			}
+			$("#sure").click(function() {
+				var luckUserCount = $("#luckUserCount").val();
+				$(this).attr("disabled","disabled");
+				if(luckUserCount > 10) {
+					alert("请输入小于10的数");
+					$("#sure").removeAttr("disabled");
+					return false;
+				}else if(luckUserCount == ""){
+					alert("请输入抽奖人数再继续！");
+					$("#sure").removeAttr("disabled");
+					return false;
+				}
+				timer = setInterval(function() {
+					var time = $("#timeNum").html();
+					if(time == 1) {
+						$(".showModelLuckItem").hide();
+						$("#luckUserCount").val("")
+						$("#mask").hide();
+						clearInterval(timer);
+						stopRandomNum = setInterval(function() {
+							showRandomNum(luckUserCount);
+						}, 100);
+						start();
+					} else {
+						timeNumImg.src = "images/time"+ (time -1) +".jpg";
+						timeNum.innerHTML = timeNum.innerHTML - 1;
+					}
+				}, 1000);
+				timeNumImg.src = "images/time3.jpg";
+			})
+
+			/*点击开始抽奖触发函数*/
+			function start() {
+				$("#winItem").html("");
+				runingmic.play(); /* 抽奖音乐开始 */
+				clearInterval(timer);
+				clearTimeout(stopMuic);
+			}
+			/* 点击停止抽奖触发函数 */
+			function stop() {
+				clearInterval(stopRandomNum);
+				runingmic.pause(); /* 抽奖音乐停止 */
+				stopgmic.play();
+				stopMuic = setTimeout(function() {
+					stopgmic.pause(); /*  */
+				}, 5000);
+				setTimeout(function() {
+					//$(".winShowItem").fadeIn("slow");
+					$(".rightWinList").show();
+					$(".rightList li").addClass("rightWinListLi");
+					var aliLen = $(".rightList li").length;
+					switch(aliLen) {
+						case 1:
+							setTimeout(function() {
+								$(".winShowItem").fadeIn("slow");
+							}, 4000);
+							break;
+						case 2:
+							setTimeout(function() {
+								$(".winShowItem").fadeIn("slow");
+							}, 5000);
+							break;
+						case 3:
+							setTimeout(function() {
+								$(".winShowItem").fadeIn("slow");
+							}, 5500);
+							break;
+						case 4:
+							setTimeout(function() {
+								$(".winShowItem").fadeIn("slow");
+							}, 6000);
+							break;
+						case 5:
+							setTimeout(function() {
+								$(".winShowItem").fadeIn("slow");
+							}, 6500);
+							break;
+						case 6:
+							setTimeout(function() {
+								$(".winShowItem").fadeIn("slow");
+							}, 7000);
+							break;
+						case 7:
+							setTimeout(function() {
+								$(".winShowItem").fadeIn("slow");
+							}, 7500);
+							break;
+						case 8:
+							setTimeout(function() {
+								$(".winShowItem").fadeIn("slow");
+							}, 8000);
+							break;
+						case 9:
+							setTimeout(function() {
+								$(".winShowItem").fadeIn("slow");
+							}, 8500);
+							break;
+						case 10:
+							setTimeout(function() {
+								$(".winShowItem").fadeIn("slow");
+							}, 9000);
+							break;
+						default:
+							break;
+					}
+				}, 100);
+			}
+			//data-issel==1 中奖者   
+			//data-issel==0 未抽
+			/*随机所有的code并且不重复*/
+			function showRandomNum(num) {
+				var randId = [];
+				var winner = [];
+				var otmpArr = JSON.parse(localStorage.getItem("allDataA"));
+				for(var i = 0; i < otmpArr.length; i++) {
+					randId.push(otmpArr[i].id);
+					getRand = getRandom1(randId, num);
+				}
+				//getRand  中奖人数组
+				for(var i = 0; i < allData.length; i++) {
+					$("#userImg" + allData[i].id).removeClass("active");
+				}
+				/* 随机  添加样式   别的删除样式  */
+				for(var i = 0; i < getRand.length; i++) {
+					winner.push(getRand[i]);
+					$("#userImg" + getRand[i]).addClass("active");
+				}
+			}
+			/* 獲取抽獎這id */
+			function getLuckId() {
+				var haveActive = [];
+				for(var i = 0; i < getRand.length; i++) {
+					var oitme = getRand[i];
+					$("#userImg" + getRand[i]).attr("data-issel", "1");
+					if($(oitme).attr("data-issel") == "1") {
+						haveActive.push(oitme.getAttribute("id"));
+					}
+				}
+				del(getRand);
+			}
+
+			/* 刪除中獎數據 */
+			function del(data) {
+				for(var winner in data) {
+					for(var item in otmpArr) {
+						if(data[winner] == otmpArr[item].id) {
+							var vindex = findIndexDb(data[winner]);
+							if(vindex != -1) {
+								otmpArr.splice(vindex, 1);
+								localStorage.setItem("allDataA", JSON.stringify(otmpArr));
+								ergodicWinAll(allWin);
+								break;
+							}
+						}
+					}
+				}
+			}
+			/* 遍历数据到全部中奖人员 */
+			function ergodicWinAll(data) {
+				//console.log(data);
+				var firstPrize = '';
+				var firestOne = '';
+				var secondAward = "";
+				var tuhao = '';
+				var thirdAward = '';
+				for(var item in data) {
+					if(data[item].winId == 3) {
+						firstPrize +='<li>'+
+							'<div class="items_info">' +
+							'<span>' + data[item].name + '</span>' +
+							'<span>' + data[item].department + '</span>' +
+							'</div>' +
+							'</li>';
+					} else if(data[item].winId == 2) {
+						firestOne +='<li>'+
+							'<div class="items_info">' +
+							'<span>' + data[item].name + '</span>' +
+							'<span>' + data[item].department + '</span>' +
+							'</div>' +
+							'</li>';
+					} else if(data[item].winId == 1) {
+						secondAward +='<li>'+
+							'<div class="items_info">' +
+							'<span>' + data[item].name + '</span>' +
+							'<span>' + data[item].department + '</span>' +
+							'</div>';
+					} else if(data[item].winId == 0) {
+						thirdAward +='<li>'+
+							'<div class="items_info">' +
+							'<span>' + data[item].name + '</span>' +
+							'<span>' + data[item].department + '</span>' +
+							'</div>' +
+							'</li>';
+					} else if(data[item].winId == -1) {
+						tuhao +='<li>'+
+							'<div class="items_info">' +
+							'<span>' + data[item].name + '</span>' +
+							'<span>' + data[item].department + '</span>' +
+							'</div>' +
+							'</li>';
+					}
+
+				}
+				$(".firstPrize").html(firstPrize);
+				$(".firestOne").html(firestOne);
+				$(".secondAward").html(secondAward);
+				$(".thirdAward").html(thirdAward);
+				$(".tuhaoList").html(tuhao);
+			}
+
+			function findIndexDb(item) {
+				var index = -1;
+				var setWinner = [];
+				var otmp = [];
+				var luckName = ""; //中奖人
+				var rightWinList = ""; /* 右边中奖列表 */
+				for(var i = 0; i < otmpArr.length; i++) {
+					var oitem = otmpArr[i];
+					oitem.winId = getConfigId;
+					if(oitem.id == item) {
+						index = i;
+						luckName += '<li>' +
+										'<div class="winImg">' +
+										'<img src="' + oitem.imgUrl + '"/>' +
+										'</div>' +
+										'<div class="winDec">' +
+										'<span>' + oitem.name + '</span>' +
+										'<span>' + oitem.department + '</span>' +
+										'</div>' +
+									'</li>';
+						rightWinList = '<li>' +
+											'<div class="winImg">' +
+											'<img src="' + oitem.imgUrl + '"/>' +
+											'</div>' +
+											'<div class="winDec">' +
+											'<span>' + oitem.name + '</span>' +
+											'<span>' + oitem.department + '</span>' +
+											'</div>' +
+										'</li>';
+
+						allWin.push(oitem)
+						break;
+					}
+
+				}
+				$("#winItem").append(luckName);
+				if(getConfigId == 1){
+					$(".winShowItem .showCon ul").find("li").css("width", "20%");
+					$(".winShowItem .showCon .winnerTitle>h1").css("width", "15rem");
+					$(".showCon").css({"width":"80%","height":"39vh"});
+				}else if(getConfigId == 2){
+					$(".showCon").css("width", "30%");
+					$(".winShowItem .showCon ul").find("li").css("width", "50%");
+					$("#winItem").css("margin-top","5vh");
+					$(".winShowItem .showCon .winnerTitle>h1").css("width", "15rem");
+				}else if(getConfigId == 3){
+					$(".showCon").css("width", "22%");
+					$(".winShowItem .showCon ul").find("li").css("width", "100%");
+					$(".winShowItem .showCon .winnerTitle>h1").css("width", "15rem");
+				}else if(getConfigId == 0){
+					$(".showCon").css("width", "80%");
+					$(".winShowItem .showCon ul").find("li").css("width", "2%");
+					$(".winShowItem .showCon .winnerTitle>h1").css("width", "15rem");
+					$(".winShowItem .showCon ul").css("display", "inherit");
+				}else if(getConfigId == -1){
+					$(".showCon").css({"height":"58vh","width":"80%"});
+					$(".winShowItem .showCon .winnerTitle>h1").css("width", "15rem");
+					$(".winShowItem .showCon ul").css("display", "inherit");
+				}
+				$(".rightList").append(rightWinList);
+
+				return index;
+			}
+			/* 抽奖结束 */
+			function stopLuck() {
+				clearInterval(timer);
+			}
+
+			function init() {
+
+				camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
+				camera.position.z = 2500; //3000
+				scene = new THREE.Scene();
+				// table
+				for(var i = 0; i < allData.length; i++) {
+					var element = document.createElement('div');
+					element.className = 'element';
+					var img = document.createElement('img');
+					img.src = allData[i].imgUrl;
+					img.id = "userImg" + allData[i].id;
+					img.setAttribute("data-issel", "0");
+					element.appendChild(img);
+					var object = new THREE.CSS3DObject(element);
+					object.position.x = Math.random() * 4000 - 2000;
+					object.position.y = Math.random() * 4000 - 2000;
+					object.position.z = Math.random() * 4000 - 2000;
+					scene.add(object);
+					objects.push(object);
+					// 表格需要坐标进行排序的
+					var object = new THREE.Object3D();
+					object.position.x = (allData[i + 3] * 140) - 1330;
+					object.position.y = -(allData[i + 4] * 180) + 990;
+					targets.table.push(object);
+				}
+				// sphere
+				var vector = new THREE.Vector3();
+				var spherical = new THREE.Spherical();
+				for(var i = 0, l = objects.length; i < l; i++) {
+					var phi = Math.acos(-1 + (2 * i) / l);
+					var theta = Math.sqrt(l * Math.PI) * phi;
+					var object = new THREE.Object3D();
+					spherical.set(800, phi, theta);
+					object.position.setFromSpherical(spherical);
+					vector.copy(object.position).multiplyScalar(2);
+					object.lookAt(vector);
+					targets.sphere.push(object);
+				}
+				//渲染
+				renderer = new THREE.CSS3DRenderer();
+				renderer.setSize(window.innerWidth, window.innerHeight);
+				renderer.domElement.style.position = 'absolute';
+				document.getElementById('container').appendChild(renderer.domElement);
+
+				// 鼠标控制
+				controls = new THREE.TrackballControls(camera, renderer.domElement);
+				controls.rotateSpeed = 60000; //当前者为true时默认2.0，代表每轮60fps用时30s,值越小转动越慢
+				controls.minDistance = 2000; //拉远镜头
+				controls.maxDistance = 10000; //拉进镜头
+				controls.autoRotate = true; //相机自动围绕目标旋转但必须调用update()在你的animation循环中
+				var button = document.getElementById('sphere');
+				button.addEventListener('click', function(event) {
+					transform(targets.sphere, 2000);
+				}, false);
+				transform(targets.sphere, 2000);
+				window.addEventListener('resize', onWindowResize, false);
+			}
+
+			function transform(targets, duration) {
+				TWEEN.removeAll();
+				for(var i = 0; i < objects.length; i++) {
+					var object = objects[i];
+					var target = targets[i];
+					new TWEEN.Tween(object.position)
+						.to({
+							x: target.position.x,
+							y: target.position.y,
+							z: target.position.z
+						}, Math.random() * duration + duration)
+						.easing(TWEEN.Easing.Exponential.InOut)
+						.start();
+					new TWEEN.Tween(object.rotation)
+						.to({
+							x: target.rotation.x,
+							y: target.rotation.y,
+							z: target.rotation.z
+						}, Math.random() * duration + duration)
+						.easing(TWEEN.Easing.Exponential.InOut)
+						.start();
+				}
+				new TWEEN.Tween(this)
+					.to({}, duration * 2)
+					.onUpdate(render)
+					.start();
+			}
+
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize(window.innerWidth, window.innerHeight);
+				render();
+			}
+
+			function animate() {
+				// 让场景通过x轴或者y轴旋转  & z
+				scene.rotation.x += 0.011;
+				scene.rotation.y += 0.008;
+				requestAnimationFrame(animate);
+				TWEEN.update();
+				controls.update();
+				// 渲染循环
+				render();
+			}
+
+			function render() {
+				renderer.render(scene, camera);
+			}
+			/* 随机数  暂时不用 */
+			function getRandom1(arr, count) {
+				var shuffled = arr.slice(0),
+					i = arr.length,
+					min = i - count,
+					temp, index;
+				while(i-- > min) {
+					index = Math.floor((i + 1) * Math.random());
+					temp = shuffled[index];
+					shuffled[index] = shuffled[i];
+					shuffled[i] = temp;
+				}
+				return shuffled.slice(min);
+			}
+			$("#close").click(function() {
+				$(".addData").hide()
+			})
+
+		})
+
+		function reset() {
+			userDb.transaction(function(tr) {
+				tr.executeSql("drop table user")
+			})
+		}
+
+		/*点击关闭隐藏显示全部窗口事件*/
+		$(".items_close").click(function() {
+			$("#showListAll").hide();
+		});
+	</script>
+
+	<script>
+		(function() {
+			var marquee = document.getElementById('vt_grow_ul');
+			var offset = 0;
+			var scrollheight = marquee.offsetHeight;
+			var firstNode = marquee.children[0].cloneNode(true);
+			marquee.appendChild(firstNode);
+			setInterval(function() {
+				if(offset == scrollheight) {
+					offset = 0;
+				}
+				marquee.style.marginTop = "-" + offset + "px";
+				offset += 1;
+			}, 50);
+		})();
+	</script>
+
+	<script>
+		const nums = document.querySelectorAll('.nums span');
+		const counter = document.querySelector('.counter');
+		const finalMessage = document.querySelector('.final');
+
+		runAnimation();
+
+		function resetDOM() {
+			counter.classList.remove('hide');
+			finalMessage.classList.remove('show');
+
+			nums.forEach(num => {
+				num.classList.value = '';
+			});
+
+			nums[0].classList.add('in');
+		}
+
+		function runAnimation() {
+			nums.forEach((num, idx) => {
+				const penultimate = nums.length - 1;
+				num.addEventListener('animationend', (e) => {
+					if(e.animationName === 'goIn' && idx !== penultimate) {
+						num.classList.remove('in');
+						num.classList.add('out');
+					} else if(e.animationName === 'goOut' && num.nextElementSibling) {
+						num.nextElementSibling.classList.add('in');
+					} else {
+						//counter.classList.add('hide');
+						//finalMessage.classList.add('show');
+					}
+				});
+			});
+		}
+	</script>
+
+	<!--显示列表全部-->
+	<script>
+		var list = document.querySelectorAll('.list');
+
+		function accordion(e) {
+			e.stopPropagation();
+			if(this.classList.contains('active')) {
+				this.classList.remove('active');
+			} else
+			if(this.parentElement.parentElement.classList.contains('active')) {
+				this.classList.add('active');
+			} else {
+				for(i = 0; i < list.length; i++) {
+					list[i].classList.remove('active');
+
+				}
+				this.classList.add('active');
+			}
+		}
+		for(i = 0; i < list.length; i++) {
+			list[i].addEventListener('click', accordion);
+		}
+
+		$(".tuhao").click(function() {
+			$(".showAllTh").fadeIn("slow");
+		});
+		$(".close_show_all_th").click(function() {
+			$(".showAllTh").fadeOut("slow");
+		})
+	</script>
+
+</html>

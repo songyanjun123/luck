@@ -1,0 +1,977 @@
+var config = [{
+	"id": 0,
+	"name": "三等奖",
+	"controid": "btn0",
+	"winTime": 3,
+	"userCount": 10,
+	"winImg": "",
+	"winDesc": "奖品描述",
+	"hide": 1,
+	"state": 1
+}, {
+	"id": 1,
+	"name": "二等奖",
+	"controid": "btn1",
+	"winTime": 3,
+	"userCount": 5,
+	"winImg": "",
+	"winDesc": "奖品描述",
+	"hide": 1,
+	"state": 1
+}, {
+	"id": 2,
+	"name": "一等奖",
+	"controid": "btn2",
+	"winTime": 3,
+	"userCount": 2,
+	"winImg": "",
+	"winDesc": "奖品描述",
+	"hide": 1,
+	"state": 1
+}, {
+	"id": 3,
+	"name": "特等奖",
+	"controid": "btn3",
+	"winTime": 3,
+	"userCount": 1,
+	"winImg": "",
+	"winDesc": "奖品描述",
+	"hide": 1,
+	"state": 1
+}, {
+	"id": -1,
+	"name": "土豪奖",
+	"controid": "btn4",
+	"winTime": 3,
+	"userCount": -1,
+	"winImg": "",
+	"winDesc": "奖品描述",
+	"hide": 1,
+	"state": 1
+}];
+
+var allData = [{
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/李江森部/刘晓红_thumbnail.jpg",
+	"name": "刘晓红",
+	"department": "微糖总部-李江森部",
+	"id": 0,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/苏涛_thumbnail.jpg",
+	"name": "苏涛",
+	"department": "微糖总部-杨硕部",
+	"id": 1,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/廊坊分部/销售部/王媛媛_thumbnail.jpg",
+	"name": "王媛媛",
+	"department": "廊坊分部-销售部",
+	"id": 2,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/李伟丽1_thumbnail.jpg",
+	"name": "李伟丽",
+	"department": "微糖总部-程同仁部",
+	"id": 3,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/嘉捷分部/培训部/邓永平1_thumbnail.jpg",
+	"name": "邓永平",
+	"department": "嘉捷分部-培训部",
+	"id": 4,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/廊坊分部/销售部/张双双_thumbnail.jpg",
+	"name": "张双双",
+	"department": "廊坊分部-销售部",
+	"id": 5,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/李江森部/毕婷婷_thumbnail.jpg",
+	"name": "毕婷婷",
+	"department": "微糖总部-李江森部",
+	"id": 6,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/广告部/宋艳军_thumbnail.jpg",
+	"name": "宋艳军",
+	"department": "微糖总部-广告部",
+	"id": 7,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/广告部/陈中慧_thumbnail.jpg",
+	"name": "陈中慧",
+	"department": "微糖总部-广告部",
+	"id": 8,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/张雅_thumbnail.jpg",
+	"name": "张雅",
+	"department": "微糖总部-杨硕部",
+	"id": 9,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/万伟波_thumbnail.jpg",
+	"name": "万伟波",
+	"department": "微糖总部-杨硕部",
+	"id": 10,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/人资行政部/曹印堂1_thumbnail.jpg",
+	"name": "曹印堂",
+	"department": "微糖总部-人资行政部",
+	"id": 11,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/广告部/洪海英_thumbnail.jpg",
+	"name": "洪海英",
+	"department": "微糖总部-广告部",
+	"id": 12,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/人资行政部/刘秀影_thumbnail.jpg",
+	"name": "刘秀影",
+	"department": "微糖总部-人资行政部",
+	"id": 13,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/嘉捷分部/销售部/丁俊强1_thumbnail.jpg",
+	"name": "丁俊强",
+	"department": "嘉捷分部-销售部",
+	"id": 14,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/人资行政部/马亚星_thumbnail.jpg",
+	"name": "马亚星",
+	"department": "微糖总部-人资行政部",
+	"id": 15,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/于志壮_thumbnail.jpg",
+	"name": "于志壮",
+	"department": "微糖总部-杨硕部",
+	"id": 16,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/嘉捷分部/销售部/李海龙1_thumbnail.jpg",
+	"name": "李海龙",
+	"department": "嘉捷分部-销售部",
+	"id": 17,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/要瑞雄_thumbnail.jpg",
+	"name": "要瑞雄",
+	"department": "微糖总部-杨硕部",
+	"id": 18,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/赵涵_thumbnail.jpg",
+	"name": "赵涵",
+	"department": "微糖总部-程同仁部",
+	"id": 19,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/人资行政部/张乐乐_thumbnail.jpg",
+	"name": "张乐乐",
+	"department": "微糖总部-人资行政部",
+	"id": 20,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/郭佳1_thumbnail.jpg",
+	"name": "郭佳",
+	"department": "微糖总部-杨硕部",
+	"id": 21,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/人资行政部/李娜_thumbnail.jpg",
+	"name": "李娜",
+	"department": "微糖总部-人资行政部",
+	"id": 22,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/李江森部/衡迎霞_thumbnail.jpg",
+	"name": "衡迎霞",
+	"department": "微糖总部-李江森部",
+	"id": 23,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/广告部/李婷婷设计_thumbnail.jpg",
+	"name": "李婷婷设计",
+	"department": "微糖总部-广告部",
+	"id": 24,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/嘉捷分部/销售部/李广鹏_thumbnail.jpg",
+	"name": "李广鹏",
+	"department": "嘉捷分部-销售部",
+	"id": 25,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/广告部/张智展_thumbnail.jpg",
+	"name": "张智展",
+	"department": "微糖总部-广告部",
+	"id": 26,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/广告部/张宏俊_thumbnail.jpg",
+	"name": "张宏俊",
+	"department": "微糖总部-广告部",
+	"id": 27,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/汪国鹏_thumbnail.jpg",
+	"name": "汪国鹏",
+	"department": "微糖总部-程同仁部",
+	"id": 28,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/广告部/李婷婷_thumbnail.jpg",
+	"name": "李婷婷",
+	"department": "微糖总部-广告部",
+	"id": 29,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/胡建伟_thumbnail.jpg",
+	"name": "胡建伟",
+	"department": "微糖总部-杨硕部",
+	"id": 30,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/候丽新1_thumbnail.jpg",
+	"name": "候丽新",
+	"department": "微糖总部-程同仁部",
+	"id": 31,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/廊坊分部/销售部/刘朋_thumbnail.jpg",
+	"name": "刘朋",
+	"department": "廊坊分部-销售部",
+	"id": 32,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/邹莹_thumbnail.jpg",
+	"name": "邹莹",
+	"department": "微糖总部-程同仁部",
+	"id": 33,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/廊坊分部/销售部/张伟东_thumbnail.jpg",
+	"name": "张伟东",
+	"department": "廊坊分部-销售部",
+	"id": 34,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/嘉捷分部/销售部/郑云燕_thumbnail.jpg",
+	"name": "郑云燕",
+	"department": "嘉捷分部-销售部",
+	"id": 35,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/姜小女1_thumbnail.jpg",
+	"name": "姜小女",
+	"department": "微糖总部-程同仁部",
+	"id": 36,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/巩小霞_thumbnail.jpg",
+	"name": "巩小霞",
+	"department": "微糖总部-杨硕部",
+	"id": 37,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/李江森部/池智慧_thumbnail.jpg",
+	"name": "池智慧",
+	"department": "微糖总部-李江森部",
+	"id": 38,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/陈秉勋_thumbnail.jpg",
+	"name": "陈秉勋",
+	"department": "微糖总部-程同仁部",
+	"id": 39,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/莫浩1_thumbnail.jpg",
+	"name": "莫浩",
+	"department": "微糖总部-程同仁部",
+	"id": 40,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/吴玉静1_thumbnail.jpg",
+	"name": "吴玉静",
+	"department": "微糖总部-程同仁部",
+	"id": 41,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/廊坊分部/财务部/孟月_thumbnail.jpg",
+	"name": "孟月",
+	"department": "廊坊分部-财务部",
+	"id": 42,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/张秀静_thumbnail.jpg",
+	"name": "张秀静",
+	"department": "微糖总部-杨硕部",
+	"id": 43,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/宋延芹_thumbnail.jpg",
+	"name": "宋延芹",
+	"department": "微糖总部-程同仁部",
+	"id": 44,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/广告部/刘翀_thumbnail.jpg",
+	"name": "刘翀",
+	"department": "微糖总部-广告部",
+	"id": 45,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/李鹤翔1_thumbnail.jpg",
+	"name": "李鹤翔",
+	"department": "微糖总部-杨硕部",
+	"id": 46,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/人资行政部/赵跃新_thumbnail.jpg",
+	"name": "赵跃新",
+	"department": "微糖总部-人资行政部",
+	"id": 47,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/刘志奇_thumbnail.jpg",
+	"name": "刘志奇",
+	"department": "微糖总部-程同仁部",
+	"id": 48,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/嘉捷分部/销售部/王乐思_thumbnail.jpg",
+	"name": "王乐思",
+	"department": "嘉捷分部-销售部",
+	"id": 49,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/嘉捷分部/销售部/白晓霞1_thumbnail.jpg",
+	"name": "白晓霞",
+	"department": "嘉捷分部-销售部",
+	"id": 50,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/广告部/芦浩然_thumbnail.jpg",
+	"name": "芦浩然",
+	"department": "微糖总部-广告部",
+	"id": 51,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/人资行政部/王婷_thumbnail.jpg",
+	"name": "王婷",
+	"department": "微糖总部-人资行政部",
+	"id": 52,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/嘉捷分部/销售部/任振华1_thumbnail.jpg",
+	"name": "任振华",
+	"department": "嘉捷分部-销售部",
+	"id": 53,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/廊坊分部/销售部/蒋超1_thumbnail.jpg",
+	"name": "蒋超",
+	"department": "廊坊分部-销售部",
+	"id": 54,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/广告部/范磊磊_thumbnail.jpg",
+	"name": "范磊磊",
+	"department": "微糖总部-广告部",
+	"id": 55,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/田腾飞_thumbnail.jpg",
+	"name": "田腾飞",
+	"department": "微糖总部-杨硕部",
+	"id": 56,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/廊坊分部/销售部/孟培培_thumbnail.jpg",
+	"name": "孟培培",
+	"department": "廊坊分部-销售部",
+	"id": 57,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/李江森部/刘海珍1_thumbnail.jpg",
+	"name": "刘海珍",
+	"department": "微糖总部-李江森部",
+	"id": 58,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/富玮_thumbnail.jpg",
+	"name": "富玮",
+	"department": "微糖总部-杨硕部",
+	"id": 59,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/廊坊分部/销售部/王立新_thumbnail.jpg",
+	"name": "王立新",
+	"department": "廊坊分部-销售部",
+	"id": 60,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/张金英_thumbnail.jpg",
+	"name": "张金英",
+	"department": "微糖总部-程同仁部",
+	"id": 61,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/广告部/李文强1_thumbnail.jpg",
+	"name": "李文强",
+	"department": "微糖总部-广告部",
+	"id": 62,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/赵佳玉_thumbnail.jpg",
+	"name": "赵佳玉",
+	"department": "微糖总部-杨硕部",
+	"id": 63,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/广告部/蔡京九_thumbnail.jpg",
+	"name": "蔡京九",
+	"department": "微糖总部-广告部",
+	"id": 64,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/人资行政部/王金玉1_thumbnail.jpg",
+	"name": "王金玉",
+	"department": "微糖总部-人资行政部",
+	"id": 65,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/杨硕_thumbnail.jpg",
+	"name": "杨硕",
+	"department": "微糖总部-杨硕部",
+	"id": 66,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/廊坊分部/销售部/王思佳_thumbnail.jpg",
+	"name": "王思佳",
+	"department": "廊坊分部-销售部",
+	"id": 67,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/陈继红_thumbnail.jpg",
+	"name": "陈继红",
+	"department": "微糖总部-程同仁部",
+	"id": 68,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/嘉捷分部/销售部/曹佳颖_thumbnail.jpg",
+	"name": "曹佳颖",
+	"department": "嘉捷分部-销售部",
+	"id": 69,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/李江森部/李江森_thumbnail.jpg",
+	"name": "李江森",
+	"department": "微糖总部-李江森部",
+	"id": 70,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/嘉捷分部/销售部/许紫欣1_thumbnail.jpg",
+	"name": "许紫欣",
+	"department": "嘉捷分部-销售部",
+	"id": 71,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/程同仁_thumbnail.jpg",
+	"name": "程同仁",
+	"department": "微糖总部-程同仁部",
+	"id": 72,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/廊坊分部/销售部/王聪_thumbnail.jpg",
+	"name": "王聪",
+	"department": "廊坊分部-销售部",
+	"id": 73,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/陈力力1_thumbnail.jpg",
+	"name": "陈力力",
+	"department": "微糖总部-杨硕部",
+	"id": 74,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/耿俊杰_thumbnail.jpg",
+	"name": "耿俊杰",
+	"department": "微糖总部-程同仁部",
+	"id": 75,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/孙永强_thumbnail.jpg",
+	"name": "孙永强",
+	"department": "微糖总部-程同仁部",
+	"id": 76,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/嘉捷分部/销售部/刘锡龙1_thumbnail.jpg",
+	"name": "刘锡龙",
+	"department": "嘉捷分部-销售部",
+	"id": 77,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/人资行政部/计海云_thumbnail.jpg",
+	"name": "计海云",
+	"department": "微糖总部-人资行政部",
+	"id": 78,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/嘉捷分部/销售部/王凯特1_thumbnail.jpg",
+	"name": "王凯特",
+	"department": "嘉捷分部-销售部",
+	"id": 79,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/嘉捷分部/销售部/彭宗顺1_thumbnail.jpg",
+	"name": "彭宗顺",
+	"department": "嘉捷分部-销售部",
+	"id": 80,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/嘉捷分部/销售部/胡月鹏1_thumbnail.jpg",
+	"name": "胡月鹏",
+	"department": "嘉捷分部-销售部",
+	"id": 81,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/樊荣_thumbnail.jpg",
+	"name": "樊荣",
+	"department": "微糖总部-程同仁部",
+	"id": 82,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/广告部/田涛_thumbnail.jpg",
+	"name": "田涛",
+	"department": "微糖总部-广告部",
+	"id": 83,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/嘉捷分部/销售部/王振标_thumbnail.jpg",
+	"name": "王振标",
+	"department": "嘉捷分部-销售部",
+	"id": 84,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/耿玉田_thumbnail.jpg",
+	"name": "耿玉田",
+	"department": "微糖总部-程同仁部",
+	"id": 85,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/嘉捷分部/人事部/阮娇娇1_thumbnail.jpg",
+	"name": "阮娇娇",
+	"department": "嘉捷分部-人事部",
+	"id": 86,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/廊坊分部/销售部/刘子厚_thumbnail.jpg",
+	"name": "刘子厚",
+	"department": "廊坊分部-销售部",
+	"id": 87,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/朱东亮_thumbnail.jpg",
+	"name": "朱东亮",
+	"department": "微糖总部-杨硕部",
+	"id": 88,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/广告部/雷晴_thumbnail.jpg",
+	"name": "雷晴",
+	"department": "微糖总部-广告部",
+	"id": 89,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/廊坊分部/销售部/白鹏_thumbnail.jpg",
+	"name": "白鹏",
+	"department": "廊坊分部-销售部",
+	"id": 90,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/孙明明1_thumbnail.jpg",
+	"name": "孙明明",
+	"department": "微糖总部-杨硕部",
+	"id": 91,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/沈贵阳_thumbnail.jpg",
+	"name": "沈贵阳",
+	"department": "微糖总部-杨硕部",
+	"id": 92,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/陆欢_thumbnail.jpg",
+	"name": "陆欢",
+	"department": "微糖总部-程同仁部",
+	"id": 93,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/李江森部/贾晓珍_thumbnail.jpg",
+	"name": "贾晓珍",
+	"department": "微糖总部-李江森部",
+	"id": 94,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/刘辉_thumbnail.jpg",
+	"name": "刘辉",
+	"department": "微糖总部-程同仁部",
+	"id": 95,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/嘉捷分部/销售部/马志鹏1_thumbnail.jpg",
+	"name": "马志鹏",
+	"department": "嘉捷分部-销售部",
+	"id": 96,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/人资行政部/郝子磊1_thumbnail.jpg",
+	"name": "郝子磊",
+	"department": "微糖总部-人资行政部",
+	"id": 97,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/人资行政部/卢欢欢_thumbnail.jpg",
+	"name": "卢欢欢",
+	"department": "微糖总部-人资行政部",
+	"id": 98,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/人资行政部/杨倩倩_thumbnail.jpg",
+	"name": "杨倩倩",
+	"department": "微糖总部-人资行政部",
+	"id": 99,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/廊坊分部/销售部/蒋平安_thumbnail.jpg",
+	"name": "蒋平安",
+	"department": "廊坊分部-销售部",
+	"id": 100,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/嘉捷分部/销售部/刘闪闪1_thumbnail.jpg",
+	"name": "刘闪闪",
+	"department": "嘉捷分部-销售部",
+	"id": 101,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/尹磊_thumbnail.jpg",
+	"name": "尹磊",
+	"department": "微糖总部-程同仁部",
+	"id": 102,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/李江森部/姚鑫1_thumbnail.jpg",
+	"name": "姚鑫",
+	"department": "微糖总部-李江森部",
+	"id": 103,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/李江森部/冯雪玉1_thumbnail.jpg",
+	"name": "冯雪玉",
+	"department": "微糖总部-李江森部",
+	"id": 104,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/人资行政部/王伟_thumbnail.jpg",
+	"name": "王伟",
+	"department": "微糖总部-人资行政部",
+	"id": 105,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/人资行政部/白雪_thumbnail.jpg",
+	"name": "白雪",
+	"department": "微糖总部-人资行政部",
+	"id": 106,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/熊映红_thumbnail.jpg",
+	"name": "熊映红",
+	"department": "微糖总部-程同仁部",
+	"id": 107,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/贾瑞琪1_thumbnail.jpg",
+	"name": "贾瑞琪",
+	"department": "微糖总部-杨硕部",
+	"id": 108,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/广告部/齐明帅_thumbnail.jpg",
+	"name": "齐明帅",
+	"department": "微糖总部-广告部",
+	"id": 109,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/李江森部/武剑1_thumbnail.jpg",
+	"name": "武剑",
+	"department": "微糖总部-李江森部",
+	"id": 110,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/刘彦肖_thumbnail.jpg",
+	"name": "刘彦肖",
+	"department": "微糖总部-杨硕部",
+	"id": 111,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/李妙_thumbnail.jpg",
+	"name": "李妙",
+	"department": "微糖总部-程同仁部",
+	"id": 112,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/人资行政部/吕昌_thumbnail.jpg",
+	"name": "吕昌",
+	"department": "微糖总部-人资行政部",
+	"id": 113,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/廊坊分部/人事部/刘志杰_thumbnail.jpg",
+	"name": "刘志杰",
+	"department": "廊坊分部-人事部",
+	"id": 114,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/李江森部/张丽娜1_thumbnail.jpg",
+	"name": "张丽娜",
+	"department": "微糖总部-李江森部",
+	"id": 115,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/张继霞1_thumbnail.jpg",
+	"name": "张继霞",
+	"department": "微糖总部-程同仁部",
+	"id": 116,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/代瑞雅1_thumbnail.jpg",
+	"name": "代瑞雅",
+	"department": "微糖总部-程同仁部",
+	"id": 117,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/人资行政部/高洪波_thumbnail.jpg",
+	"name": "高洪波",
+	"department": "微糖总部-人资行政部",
+	"id": 118,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/嘉捷分部/销售部/高开新_thumbnail.jpg",
+	"name": "高开新",
+	"department": "嘉捷分部-销售部",
+	"id": 119,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/广告部/姜亚敏_thumbnail.jpg",
+	"name": "姜亚敏",
+	"department": "微糖总部-广告部",
+	"id": 120,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/廊坊分部/销售部/单文迪_thumbnail.png",
+	"name": "单文迪",
+	"department": "廊坊分部-销售部",
+	"id": 121,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/李江森部/贾小超1_thumbnail.jpg",
+	"name": "贾小超",
+	"department": "微糖总部-李江森部",
+	"id": 122,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/人资行政部/王诗瑀_thumbnail.jpg",
+	"name": "王诗瑀",
+	"department": "微糖总部-人资行政部",
+	"id": 123,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/白明远_thumbnail.jpg",
+	"name": "白明远",
+	"department": "微糖总部-杨硕部",
+	"id": 124,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/嘉捷分部/销售部/闫鹏超1_thumbnail.jpg",
+	"name": "闫鹏超",
+	"department": "嘉捷分部-销售部",
+	"id": 125,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/人资行政部/王冬娜_thumbnail.jpg",
+	"name": "王冬娜",
+	"department": "微糖总部-人资行政部",
+	"id": 126,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/人资行政部/王总_thumbnail.jpg",
+	"name": "王总",
+	"department": "微糖总部-人资行政部",
+	"id": 127,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/吴伟芳_thumbnail.jpg",
+	"name": "吴伟芳",
+	"department": "微糖总部-杨硕部",
+	"id": 128,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/窦燕飞_thumbnail.jpg",
+	"name": "窦燕飞",
+	"department": "微糖总部-杨硕部",
+	"id": 129,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/李江森部/张凤1_thumbnail.jpg",
+	"name": "张凤",
+	"department": "微糖总部-李江森部",
+	"id": 130,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/嘉捷分部/销售部/沈仁义1_thumbnail.jpg",
+	"name": "沈仁义",
+	"department": "嘉捷分部-销售部",
+	"id": 131,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/广告部/杨甜甜_thumbnail.jpg",
+	"name": "杨甜甜",
+	"department": "微糖总部-广告部",
+	"id": 132,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/李江森部/苗俊峰1_thumbnail.jpg",
+	"name": "苗俊峰",
+	"department": "微糖总部-李江森部",
+	"id": 133,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/张智策1_thumbnail.jpg",
+	"name": "张智策",
+	"department": "微糖总部-程同仁部",
+	"id": 134,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/王灿_thumbnail.jpg",
+	"name": "王灿",
+	"department": "微糖总部-杨硕部",
+	"id": 135,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/闫薪宇_thumbnail.jpg",
+	"name": "闫薪宇",
+	"department": "微糖总部-杨硕部",
+	"id": 136,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/广告部/吴杰_thumbnail.jpg",
+	"name": "吴杰",
+	"department": "微糖总部-广告部",
+	"id": 137,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/李江森部/郝迎迎1_thumbnail.jpg",
+	"name": "郝迎迎",
+	"department": "微糖总部-李江森部",
+	"id": 138,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/池美玲_thumbnail.jpg",
+	"name": "池美玲",
+	"department": "微糖总部-程同仁部",
+	"id": 139,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/任雪阳_thumbnail.jpg",
+	"name": "任雪阳",
+	"department": "微糖总部-杨硕部",
+	"id": 140,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/广告部/潘超_thumbnail.jpg",
+	"name": "潘超",
+	"department": "微糖总部-广告部",
+	"id": 141,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/金兰_thumbnail.jpg",
+	"name": "金兰",
+	"department": "微糖总部-程同仁部",
+	"id": 142,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/阮建涛_thumbnail.jpg",
+	"name": "阮建涛",
+	"department": "微糖总部-程同仁部",
+	"id": 143,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/刘明鑫1_thumbnail.jpg",
+	"name": "刘明鑫",
+	"department": "微糖总部-杨硕部",
+	"id": 144,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/廊坊分部/主管/孟培培_thumbnail.jpg",
+	"name": "孟培培",
+	"department": "廊坊分部-主管",
+	"id": 145,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/苟恩娥_thumbnail.jpg",
+	"name": "苟恩娥",
+	"department": "微糖总部-程同仁部",
+	"id": 146,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/周岩_thumbnail.jpg",
+	"name": "周岩",
+	"department": "微糖总部-杨硕部",
+	"id": 147,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/人资行政部/王龙坤_thumbnail.jpg",
+	"name": "王龙坤",
+	"department": "微糖总部-人资行政部",
+	"id": 148,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/程同仁部/程志芳_thumbnail.jpg",
+	"name": "程志芳",
+	"department": "微糖总部-程同仁部",
+	"id": 149,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/廖艳丽_thumbnail.jpg",
+	"name": "廖艳丽",
+	"department": "微糖总部-杨硕部",
+	"id": 150,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/嘉捷分部/销售部/张浩1_thumbnail.jpg",
+	"name": "张浩",
+	"department": "嘉捷分部-销售部",
+	"id": 151,
+	"isShowMic": 1
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/微糖总部/杨硕部/尹梦琪_thumbnail.jpg",
+	"name": "尹梦琪",
+	"department": "微糖总部-杨硕部",
+	"id": 152,
+	"isShowMic": 0
+}, {
+	"imgUrl": "http://ghjdsh13.cn/h2/luckDraw1/images/jsonImg/嘉捷分部/主管/秦烁_thumbnail.jpg",
+	"name": "秦烁",
+	"department": "嘉捷分部-主管",
+	"id": 153,
+	"isShowMic":1
+}];
